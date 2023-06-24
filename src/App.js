@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
+import { Debug, useContactMaterial } from "@react-three/cannon";
 import { useRef, useState, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { suspend } from "suspend-react";
@@ -19,13 +20,16 @@ import {
   Html,
   Sky,
   PresentationControls,
+  PointerLockControls,
 } from "@react-three/drei";
 import { useControls } from "leva";
 import * as THREE from "three";
+import Character from "./Character";
 
 function App() {
-  const { position } = useControls({
-    position: { value: [-9, -1, -1], step: 1 },
+  const { position, rotation } = useControls({
+    position: { value: [0, 115, 199], step: 1 },
+    rotation: { value: [0, 0, 0], step: 0.1 },
   });
   return (
     <div
@@ -37,15 +41,20 @@ function App() {
     >
       <Canvas
         shadows
-        camera={{ fov: 75, near: 0.1, far: 1000, position: [0, 0, 5] }}
+        camera={{ fov: 40, near: 0.1, far: 10000, position: [0, 0, 5] }}
       >
         <ambientLight intensity={0.3} />
         <directionalLight castShadow intensity={0.5} position={[47, 45, 100]} />
-        <pointLight position={position} />
+
         <Suspense>
-          <PresentationControls polar={[0, 0]}>
-            <Model position={position} />
-          </PresentationControls>
+          <PresentationControls
+            enabled={false}
+            polar={[0, 0]}
+          ></PresentationControls>
+
+          {/* <Floor rotation={[-Math.PI / 2, 0, 0]} material={"ground"} /> */}
+          <Model position={[-9, -1, -1]} />
+          <Character position={position} rotation={rotation} />
         </Suspense>
 
         <Environment preset='apartment' />
