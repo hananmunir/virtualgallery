@@ -398,6 +398,7 @@ export function Model(props) {
           material={materials.body1}
         />
       </group>
+      {/* Add text somewhere around here */}
       <mesh
         geometry={nodes.RIMS.geometry}
         material={materials["Cart rim"]}

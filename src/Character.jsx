@@ -155,10 +155,12 @@ export default function Character({ position, rotation }) {
     if (activeAnimation.forward) {
       newVelocity.z += acc.z * delta * 0.5;
       mixer?.update(delta * 2);
+      console.log(ref.current.position);
     }
     if (activeAnimation.backward) {
       newVelocity.z -= acc.z * delta * 0.5;
       mixer?.update(delta * 2);
+      console.log(ref.current.position);
     }
     if (activeAnimation.left) {
       _A.set(0, 1, 0);
@@ -200,6 +202,18 @@ export default function Character({ position, rotation }) {
 
     state.camera.lookAt(idealLookat);
     state.camera.updateProjectionMatrix();
+
+    //addings bounds
+    if (ref.current.position.z < -26) {
+      ref.current.position.z = -26;
+    } else if (ref.current.position.z > 10) {
+      ref.current.position.z = 10;
+    }
+    if (ref.current.position.x > 34) {
+      ref.current.position.x = 34;
+    } else if (ref.current.position.x < -9) {
+      ref.current.position.x = -9;
+    }
   });
 
   useEffect(() => {
@@ -212,7 +226,7 @@ export default function Character({ position, rotation }) {
 
       document.removeEventListener("keyup", handleKeyUp);
     };
-  });
+  }, []);
   return (
     <group>
       <primitive ref={ref} object={scene} position={[0, -1, 0]} scale={0.01} />
