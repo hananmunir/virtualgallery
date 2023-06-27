@@ -202,17 +202,28 @@ export default function Character({ position, rotation }) {
 
     state.camera.lookAt(idealLookat);
     state.camera.updateProjectionMatrix();
+    let { x, z } = ref.current.position;
 
     //addings bounds
-    if (ref.current.position.z < -26) {
+    if (z < -26) {
       ref.current.position.z = -26;
-    } else if (ref.current.position.z > 10) {
+    } else if (z > 10) {
       ref.current.position.z = 10;
     }
-    if (ref.current.position.x > 34) {
+    if (x > 34) {
       ref.current.position.x = 34;
-    } else if (ref.current.position.x < -9) {
-      ref.current.position.x = -9;
+    }
+
+    if (x > -9 && x < 7 && z < -5) {
+      ref.current.position.z = -5;
+    } else if (z > -24 && z < -8 && x < 11.5) {
+      ref.current.position.x = 11.5;
+    } else if (z < 12 && z > 0 && x > 25) {
+      ref.current.position.x = 35 - z;
+    } else if (x > 21 && x < 35 && z < -16) {
+      ref.current.position.z = -16;
+    } else if (z < 11 && z > -5 && x < -7) {
+      ref.current.position.x = -7;
     }
   });
 
