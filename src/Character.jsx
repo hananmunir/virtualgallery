@@ -214,16 +214,21 @@ export default function Character({ position, rotation }) {
       ref.current.position.x = 34;
     }
 
-    if (x > -9 && x < 7 && z < -5) {
-      ref.current.position.z = -5;
-    } else if (z > -24 && z < -8 && x < 11.5) {
-      ref.current.position.x = 11.5;
-    } else if (z < 12 && z > 0 && x > 25) {
+    if (z < 3.5 && z >= -8 && x < -11) {
+      ref.current.position.x = -11;
+    } else if (z < 11 && z >= 3.5 && x < -8.1) {
+      ref.current.position.x = -8.1;
+    } else if (x > -11.5 && x <= 6.5 && z < -7) {
+      ref.current.position.z = -7;
+    } else if (z > -26.5 && z <= -21 && x < 10) {
+      ref.current.position.x = 10;
+    } else if (z > -21 && z <= -12 && x < 7.1) {
+      console.log("Here");
+      ref.current.position.x = 7.1;
+    } else if (z < 12 && z >= 0 && x > 25) {
       ref.current.position.x = 35 - z;
-    } else if (x > 21 && x < 35 && z < -16) {
+    } else if (x > 21 && x <= 35 && z < -16) {
       ref.current.position.z = -16;
-    } else if (z < 11 && z > -5 && x < -7) {
-      ref.current.position.x = -7;
     }
   });
 
