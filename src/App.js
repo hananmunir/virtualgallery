@@ -1,36 +1,15 @@
 import logo from "./logo.svg";
 import "./App.css";
-import { Debug, useContactMaterial } from "@react-three/cannon";
-import { useRef, useState, Suspense } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { suspend } from "suspend-react";
+import { useRef, Suspense } from "react";
+import { Canvas } from "@react-three/fiber";
 import { Model } from "./Gallery";
-import {
-  useGLTF,
-  useCursor,
-  useTexture,
-  Text,
-  Decal,
-  Environment,
-  OrbitControls,
-  RenderTexture,
-  RandomizedLight,
-  PerspectiveCamera,
-  AccumulativeShadows,
-  Html,
-  Sky,
-  PresentationControls,
-  PointerLockControls,
-} from "@react-three/drei";
+import { Environment, PresentationControls } from "@react-three/drei";
 import { useControls } from "leva";
-import * as THREE from "three";
 import Character from "./Character";
 
 function App() {
-  const { position, rotation } = useControls({
-    position: { value: [0, 115, 199], step: 1 },
-    rotation: { value: [0, 0, 0], step: 0.1 },
-  });
+  const toolTipRef = useRef();
+
   return (
     <div
       style={{
@@ -47,18 +26,28 @@ function App() {
         <directionalLight castShadow intensity={0.5} position={[47, 45, 100]} />
 
         <Suspense>
-          <PresentationControls
-            enabled={false}
-            polar={[0, 0]}
-          ></PresentationControls>
-
-          {/* <Floor rotation={[-Math.PI / 2, 0, 0]} material={"ground"} /> */}
-          <Model position={[-9, -1, -1]} />
-          <Character position={position} rotation={rotation} />
+          <Model position={[-9, -1, -1]} toolTipRef={toolTipRef} />
+          <Character />
         </Suspense>
 
         <Environment preset='apartment' />
       </Canvas>
+
+      <div ref={toolTipRef} className='tooltip_container'>
+        {/* Cross Icon */}
+        <div
+          className='cross_icon'
+          onClick={() => (toolTipRef.current.style.display = "none")}
+        >
+          <img src='/cancel.png' alt='cancel' />
+        </div>
+        <span>
+          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quaerat hic
+          unde aliquid impedit, maiores doloremque, sunt eos distinctio eaque
+          provident explicabo quo error ex incidunt neque? Eum quas ducimus
+          quidem.
+        </span>
+      </div>
     </div>
   );
 }

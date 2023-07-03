@@ -2,16 +2,11 @@ import { PerspectiveCamera, useGLTF } from "@react-three/drei";
 import { useFrame, useThree } from "@react-three/fiber";
 import React, { useRef, useMemo, useEffect, useCallback } from "react";
 import * as THREE from "three";
-import { Vector3, Euler, Quaternion, Matrix4, AnimationMixer } from "three";
 
-import useKeyboard from "./useKeyboard";
-
-import useFollowCam from "./useFollowCam";
-
-export default function Character({ position, rotation }) {
+export default function Character() {
   const { scene, animations } = useGLTF("/character.glb");
 
-  const { camera, scene: threeScene } = useThree();
+  const { camera } = useThree();
   const ref = useRef();
   // Create an AnimationMixer, and get the list of AnimationClip instances
   const mixer = new THREE.AnimationMixer(scene);
@@ -223,7 +218,6 @@ export default function Character({ position, rotation }) {
     } else if (z > -26.5 && z <= -21 && x < 10) {
       ref.current.position.x = 10;
     } else if (z > -21 && z <= -12 && x < 7.1) {
-      console.log("Here");
       ref.current.position.x = 7.1;
     } else if (z < 12 && z >= 0 && x > 25) {
       ref.current.position.x = 35 - z;

@@ -4,10 +4,23 @@ Command: npx gltfjsx@6.2.3 gallery.glb --transform
 */
 
 import React, { useRef } from "react";
-import { useGLTF } from "@react-three/drei";
-
+import { useGLTF, Html } from "@react-three/drei";
+import { useControls } from "leva";
+import * as THREE from "three";
 export function Model(props) {
   const { nodes, materials } = useGLTF("/gallery-transformed.glb");
+
+  const { position, rotation } = useControls("HTML", {
+    position: {
+      value: [0, 155, 199],
+
+      step: 0.1,
+    },
+    rotation: {
+      value: [0, 0, 0],
+      step: 0.1,
+    },
+  });
   return (
     <group position={props.position} {...props} dispose={null}>
       <mesh
@@ -399,6 +412,19 @@ export function Model(props) {
         />
       </group>
       {/* Add text somewhere around here */}
+      <sprite
+        onClick={() => (props.toolTipRef.current.style.display = "flex")}
+        position={[6.35, 1.5, 9.5]}
+        scale={[0.5, 0.5, 0.5]}
+        onPointerOver={(e) => (document.body.style.cursor = "pointer")}
+        onPointerOut={(e) => (document.body.style.cursor = "auto")}
+      >
+        <spriteMaterial
+          attach='material'
+          map={new THREE.TextureLoader().load("/tooltip.png")}
+        />
+      </sprite>
+
       <mesh
         geometry={nodes.RIMS.geometry}
         material={materials["Cart rim"]}
