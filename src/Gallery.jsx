@@ -12,7 +12,7 @@ export function Model(props) {
 
   const { position, rotation } = useControls("HTML", {
     position: {
-      value: [0, 155, 199],
+      value: [6.35, 1.5, 9.5],
 
       step: 0.1,
     },
@@ -415,6 +415,19 @@ export function Model(props) {
       <sprite
         onClick={() => (props.toolTipRef.current.style.display = "flex")}
         position={[6.35, 1.5, 9.5]}
+        scale={[0.5, 0.5, 0.5]}
+        onPointerOver={(e) => (document.body.style.cursor = "pointer")}
+        onPointerOut={(e) => (document.body.style.cursor = "auto")}
+      >
+        <spriteMaterial
+          attach='material'
+          map={new THREE.TextureLoader().load("/tooltip.png")}
+        />
+      </sprite>
+
+      <sprite
+        onClick={() => (props.toolTipRef2.current.style.display = "flex")}
+        position={[20.75000000000003, 1.800000000000001, -27.89999999999995]}
         scale={[0.5, 0.5, 0.5]}
         onPointerOver={(e) => (document.body.style.cursor = "pointer")}
         onPointerOut={(e) => (document.body.style.cursor = "auto")}
