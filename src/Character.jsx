@@ -227,9 +227,14 @@ export default function Character() {
   });
 
   useEffect(() => {
-    document.addEventListener("keydown", handleKeyPress);
+    const currentURL = window.location.href;
 
-    document.addEventListener("keyup", handleKeyUp);
+    // Check the URL and perform actions based on it
+    if (currentURL.includes("localhost")) {
+      document.addEventListener("keydown", handleKeyPress);
+
+      document.addEventListener("keyup", handleKeyUp);
+    }
 
     return () => {
       document.removeEventListener("keydown", handleKeyPress);

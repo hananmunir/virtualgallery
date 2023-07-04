@@ -411,32 +411,6 @@ export function Model(props) {
           material={materials.body1}
         />
       </group>
-      {/* Add text somewhere around here */}
-      <sprite
-        onClick={() => (props.toolTipRef.current.style.display = "flex")}
-        position={[6.35, 1.5, 9.5]}
-        scale={[0.5, 0.5, 0.5]}
-        onPointerOver={(e) => (document.body.style.cursor = "pointer")}
-        onPointerOut={(e) => (document.body.style.cursor = "auto")}
-      >
-        <spriteMaterial
-          attach='material'
-          map={new THREE.TextureLoader().load("/tooltip.png")}
-        />
-      </sprite>
-
-      <sprite
-        onClick={() => (props.toolTipRef2.current.style.display = "flex")}
-        position={[20.75000000000003, 1.800000000000001, -27.89999999999995]}
-        scale={[0.5, 0.5, 0.5]}
-        onPointerOver={(e) => (document.body.style.cursor = "pointer")}
-        onPointerOut={(e) => (document.body.style.cursor = "auto")}
-      >
-        <spriteMaterial
-          attach='material'
-          map={new THREE.TextureLoader().load("/tooltip.png")}
-        />
-      </sprite>
 
       <mesh
         geometry={nodes.RIMS.geometry}
